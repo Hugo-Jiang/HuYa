@@ -30,15 +30,15 @@ namespace HuYa
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox_Room = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox_Room = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.Anchor = new System.Windows.Forms.ColumnHeader();
+            this.Anchor1 = new System.Windows.Forms.ColumnHeader();
             this.LiveTitle = new System.Windows.Forms.ColumnHeader();
             this.OnlineUser = new System.Windows.Forms.ColumnHeader();
             this.RoomNumber = new System.Windows.Forms.ColumnHeader();
@@ -66,30 +66,23 @@ namespace HuYa
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "基本设置";
             // 
-            // label1
+            // groupBox2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "房间号:";
+            this.groupBox2.Location = new System.Drawing.Point(331, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(445, 148);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "配置";
             // 
-            // textBox_Room
+            // comboBox1
             // 
-            this.textBox_Room.Location = new System.Drawing.Point(67, 31);
-            this.textBox_Room.Name = "textBox_Room";
-            this.textBox_Room.Size = new System.Drawing.Size(153, 23);
-            this.textBox_Room.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(226, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 42);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "解析";
-            this.button1.UseVisualStyleBackColor = true;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(67, 77);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(153, 25);
+            this.comboBox1.TabIndex = 4;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -100,22 +93,31 @@ namespace HuYa
             this.label2.TabIndex = 3;
             this.label2.Text = "分类:";
             // 
-            // comboBox1
+            // button1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(67, 77);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(153, 25);
-            this.comboBox1.TabIndex = 4;
+            this.button1.Location = new System.Drawing.Point(226, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 42);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "解析";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // groupBox2
+            // textBox_Room
             // 
-            this.groupBox2.Location = new System.Drawing.Point(330, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(445, 148);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "配置";
+            this.textBox_Room.Location = new System.Drawing.Point(67, 31);
+            this.textBox_Room.Name = "textBox_Room";
+            this.textBox_Room.Size = new System.Drawing.Size(153, 23);
+            this.textBox_Room.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "房间号:";
             // 
             // panel1
             // 
@@ -128,11 +130,12 @@ namespace HuYa
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Anchor,
+            this.Anchor1,
             this.LiveTitle,
             this.OnlineUser,
             this.RoomNumber});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
@@ -141,10 +144,10 @@ namespace HuYa
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // Anchor
+            // Anchor1
             // 
-            this.Anchor.Text = "主播";
-            this.Anchor.Width = 100;
+            this.Anchor1.Text = "主播";
+            this.Anchor1.Width = 100;
             // 
             // LiveTitle
             // 
@@ -177,6 +180,7 @@ namespace HuYa
             this.Anchor2,
             this.LiveStatus});
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView2.GridLines = true;
             this.listView2.HideSelection = false;
             this.listView2.Location = new System.Drawing.Point(3, 19);
             this.listView2.Name = "listView2";
@@ -224,7 +228,7 @@ namespace HuYa
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader Anchor;
+        private System.Windows.Forms.ColumnHeader Anchor1;
         private System.Windows.Forms.ColumnHeader LiveTitle;
         private System.Windows.Forms.ColumnHeader OnlineUser;
         private System.Windows.Forms.ColumnHeader RoomNumber;
