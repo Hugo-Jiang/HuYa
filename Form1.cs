@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Collections;
 using ComboBoxNew;
+using Newtonsoft.Json;
 
 namespace HuYa
 {
@@ -48,7 +49,9 @@ namespace HuYa
         {
             //string Html = this.Get("https://m.huya.com/lpl", "m.huya.com");
             //System.Diagnostics.Debug.WriteLine(Html);
-            this.GetSqliteType();
+            
+            //System.Diagnostics.Debug.WriteLine(Directory.GetCurrentDirectory());
+            //System.Diagnostics.Debug.WriteLine($@"DataSource={Directory.GetCurrentDirectory()}\type.db");
         }
 
         //分类解析
@@ -57,7 +60,7 @@ namespace HuYa
             SQLiteConnection ThisConnectSqlite = new SQLiteConnection();
             try
             {
-                ThisConnectSqlite = new SQLiteConnection(@"DataSource=\type.db");
+                ThisConnectSqlite = new SQLiteConnection($@"DataSource={Directory.GetCurrentDirectory()}\type.db");
                 ThisConnectSqlite.Open();
             }catch(Exception e)
             {
@@ -77,7 +80,6 @@ namespace HuYa
                 }
                 comboBox1.DisplayMember = "Text";
                 comboBox1.ValueMember = "Value";
-                comboBox1.SelectedIndex = 0;
             }
             ThisConnectSqlite.Close();
         }
@@ -85,7 +87,34 @@ namespace HuYa
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBoxItem TypeList = (ComboBoxItem)comboBox1.Items[comboBox1.SelectedIndex];
-            MessageBox.Show(TypeList.Value.ToString());
+            GetAnchorList(TypeList.Value.ToString(),1);
+            //MessageBox.Show(TypeList.Value.ToString());
+        }
+
+        private void GetAnchorList(string gameId, int page)
+        {
+            string html = string.Empty;
+            string url = $"https://www.huya.com/cache.php?m=LiveList&do=getLiveListByPage&gameId={gameId}&tagAll=0&page={page}";
+            html = this.Get(url, "www.huya.com");
+            Rootobject rootobject = JsonConvert.DeserializeObject<Rootobject>(html);
+            Data1[] datas = rootobject.data.datas;
+            foreach(var item in datas)
+            {
+                ListViewItem listViewItem = new ListViewItem();
+                listViewItem.Text = item.nick.ToString();
+                listViewItem.SubItems.Add(item.roomName);
+                listViewItem.SubItems.Add(item.liveChannel);
+                listViewItem.SubItems.Add(item.profileRoom);
+                listView1.Items.Add(listViewItem);
+                //System.Diagnostics.Debug.WriteLine(item.nick);
+            }
+            //MessageBox.Show(data1.nick.ToString());
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.GetSqliteType();
         }
     }
 }
